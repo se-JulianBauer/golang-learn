@@ -1,0 +1,9 @@
+# START
+docker run -d --name timescaledb -p 5432:5432 \
+  -e POSTGRES_USER=user \
+  -e POSTGRES_PASSWORD=password \
+  -d timescale/timescaledb-ha:pg14-latest 
+go run .
+
+# STOP
+docker rm -f timescaledb

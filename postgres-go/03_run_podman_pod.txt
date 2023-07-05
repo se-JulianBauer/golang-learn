@@ -1,0 +1,16 @@
+# START
+podman pod create --name timescale-go-pod
+podman run -d --pod timescale-go-pod --name timescaledb \
+  -e POSTGRES_USER=user \
+  -e POSTGRES_PASSWORD=password \
+  -d timescale/timescaledb-ha:pg14-latest 
+podman build -t go-query .
+podman run -it --pod timescale-go-pod \
+  -e POSTGRES_USER=user \
+  -e POSTGRES_PASSWORD=password \
+  -e DB_HOST=localhost \
+  -e DB_PORT=5432 \
+  go-query
+
+# STOP
+podman pod rm -f timescale-go-pod
