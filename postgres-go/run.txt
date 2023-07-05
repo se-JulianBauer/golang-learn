@@ -1,0 +1,5 @@
+docker network create timescale-network
+docker run -d --network timescale-network --name timescaledb -p 5432:5432 -e POSTGRES_PASSWORD=password -d timescale/timescaledb-ha:pg14-latest 
+# wait a bit
+docker build -t postgres-go .
+docker run -it --network timescale-network postgres-go
