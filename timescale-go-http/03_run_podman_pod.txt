@@ -1,5 +1,5 @@
 # START
-podman pod create --name timescale-go-pod
+podman pod create --name timescale-go-pod -p 8080:8080
 podman run -d --pod timescale-go-pod --name timescaledb \
   -e POSTGRES_USER=user \
   -e POSTGRES_PASSWORD=password \

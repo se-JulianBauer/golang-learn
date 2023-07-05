@@ -4,13 +4,13 @@ docker run -d --network timescale-network --name timescaledb -p 5432:5432 \
   -e POSTGRES_USER=user \
   -e POSTGRES_PASSWORD=password \
   -d timescale/timescaledb-ha:pg14-latest 
-docker build -t go-query .
-docker run -it --network timescale-network --name go-query \
+docker build -t go-query-http .
+docker run -it --network timescale-network --name go-query-http -p 8080:8080 \
   -e POSTGRES_USER=user \
   -e POSTGRES_PASSWORD=password \
   -e DB_HOST=timescaledb \
   -e DB_PORT=5432 \
-  go-query
+  go-query-http
   
 
 # STOP

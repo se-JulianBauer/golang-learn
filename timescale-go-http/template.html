@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Timescale Query Example</title>
+  </head>
+  <body>
+    <h1>Timescale Query Example</h1>
+    <form method="post">
+      <input
+        type="text"
+        name="query"
+        placeholder="Enter timescale query"
+        value="{{ .Query }}"
+      />
+      <button type="submit">Submit</button>
+    </form>
+    {{ if ne .Query "" }}
+    <p>query: {{ .Query }}</p>
+    <p>timescale response: {{ .Response }}</p>
+    {{ end }}
+  </body>
+</html>

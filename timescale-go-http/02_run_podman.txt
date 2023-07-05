@@ -5,7 +5,7 @@ podman run -d --network timescale-network --name timescaledb -p 5432:5432 \
   -e POSTGRES_PASSWORD=password \
   -d timescale/timescaledb-ha:pg14-latest 
 podman build -t go-query .
-podman run -it --network timescale-network --name go-query \
+podman run -it --network timescale-network --name go-query -p 8080:8080 \
   -e POSTGRES_USER=user \
   -e POSTGRES_PASSWORD=password \
   -e DB_HOST=timescaledb \
