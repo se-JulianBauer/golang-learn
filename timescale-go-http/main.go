@@ -104,8 +104,12 @@ func databaseConnection(ctx context.Context, queries <-chan string, resps chan<-
 		conn, err = pgx.Connect(ctx, connStr)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Waiting for database: %v\n", err)
-			time.Sleep(5 * time.Second)
-			continue
+			select {
+			case <-ctx.Done():
+				return
+			case <-time.After(5 * time.Second):
+				continue
+			}
 		}
 		break
 	}

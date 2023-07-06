@@ -1,19 +1,19 @@
-# START (THIS DOESN'T WORK YET)
+# START 
 podman network create timescale-network
 podman run -d --network timescale-network --name timescaledb -p 5432:5432 \
   -e POSTGRES_USER=user \
   -e POSTGRES_PASSWORD=password \
   -d timescale/timescaledb-ha:pg14-latest 
-podman build -t go-query .
-podman run -it --network timescale-network --name go-query -p 8080:8080 \
+podman build -t go-query-http .
+podman run -it --network timescale-network --name go-query-http -p 8080:8080 \
   -e POSTGRES_USER=user \
   -e POSTGRES_PASSWORD=password \
   -e DB_HOST=timescaledb \
   -e DB_PORT=5432 \
-  go-query
+  go-query-http
   
 
 # STOP
-podman network rm -f timescale-network
 podman rm -f timescaledb
-podman rm -f go-query
+podman rm -f go-query-http
+podman network rm -f timescale-network

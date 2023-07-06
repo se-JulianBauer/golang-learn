@@ -1,16 +1,16 @@
-# START (THIS DOESN'T WORK YET)
+# START 
 podman pod create --name timescale-go-pod -p 8080:8080
 podman run -d --pod timescale-go-pod --name timescaledb \
   -e POSTGRES_USER=user \
   -e POSTGRES_PASSWORD=password \
   -d timescale/timescaledb-ha:pg14-latest 
-podman build -t go-query .
+podman build -t go-query-http .
 podman run -it --pod timescale-go-pod \
   -e POSTGRES_USER=user \
   -e POSTGRES_PASSWORD=password \
   -e DB_HOST=localhost \
   -e DB_PORT=5432 \
-  go-query
+  go-query-http
 
 # STOP
 podman pod rm -f timescale-go-pod
