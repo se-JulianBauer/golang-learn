@@ -16,7 +16,12 @@
     </form>
     {{ if ne .Query "" }}
     <p>query: {{ .Query }}</p>
-    <p>timescale response: {{ .Response }}</p>
+    <p>{{ .Response }}</p>
     {{ end }}
   </body>
 </html>
+<style>
+  p {
+    white-space: pre;
+  }
+</style>
